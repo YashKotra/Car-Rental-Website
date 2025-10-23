@@ -9,8 +9,6 @@ const Header = () => {
 
       {/* NavBar */}
       <NavBar />
-
-      {/* CartDrawer */}
     </header>
   );
 };

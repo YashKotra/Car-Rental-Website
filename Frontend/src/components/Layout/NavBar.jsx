@@ -15,7 +15,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="container mx-auto flex px-6 py-6 justify-between items-center">
+    <div className="container mx-auto flex px-6 py-6 justify-between items-center ">
       {/* Desktop Navigation Links */}
       <div className="hidden md:flex space-x-6">
         <Link
@@ -28,25 +28,25 @@ const NavBar = () => {
           to="/cars"
           className="text-sm font-medium uppercase text-white hover:text-gray-400"
         >
-          ALL Cars
+          All Cars
         </Link>
         <Link
-          to="/sports"
+          to="/cars/sports"
           className="text-sm font-medium uppercase text-white hover:text-gray-400"
         >
-          SPORTS
+          Sports
         </Link>
         <Link
-          to="/suv"
+          to="/cars/suv"
           className="text-sm font-medium uppercase text-white hover:text-gray-400"
         >
           SUV
         </Link>
         <Link
-          to="/sedan"
+          to="/cars/sedan"
           className="text-sm font-medium uppercase text-white hover:text-gray-400"
         >
-          SEDAN
+          Sedan
         </Link>
       </div>
 

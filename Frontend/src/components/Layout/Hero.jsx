@@ -15,13 +15,13 @@ const Hero = () => {
       <div className="absolute inset-0 z-10 flex items-center justify-center">
         <div className="text-center text-white p-6 drop-shadow-lg">
           <h1 className="text-4xl md:text-9xl font-bold tracking-tighter uppercase mb-4">
-           Drive Your Journey
+            Drive Your Journey
           </h1>
           <p className="text-lg tracking-tighter font-semibold  md:text-xl mt-12 mb-6">
             Affordable. Reliable. Anytime, Anywhere.
           </p>
           <Link
-            to="collections/all"
+            to="/cars"
             className="bg-white text-gray-950 px-6 py-2 rounded-sm text-lg inline-block"
           >
             Rent Now

@@ -11,155 +11,117 @@ const Signup = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const { userInfo, loading, error } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (userInfo) {
-      navigate("/");
-    }
-  }, [navigate, userInfo]);
+    if (userInfo) navigate("/");
+  }, [userInfo, navigate]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
     dispatch(register({ name, email, password }));
   };
 
   return (
-    <div className="flex mb-4 ">
+    <div className="min-h-screen flex bg-black text-white">
       {/* Left: Form Section */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center bg-white px-2">
-        <div className="max-w-md w-full p-4 bg-white rounded-3xl shadow-md text-center">
-          <h1 className="pb-6 font-bold text-3xl text-gray-800">Register</h1>
+      <div className="w-full lg:w-1/2 flex items-center justify-center px-4">
+        <div className="max-w-md w-full p-8 rounded-3xl bg-[#0f0f0f] shadow-[0_0_40px_rgba(255,255,255,0.05)] border border-white/10">
+          <h1 className="pb-6 font-bold text-3xl text-center tracking-wide">
+            Create Account
+          </h1>
 
-          {error && <div className="text-red-500 mb-4">{error}</div>}
-          {loading && <div className="text-black mb-4">Loading...</div>}
+          {error && (
+            <p className="mb-4 text-red-400 text-sm text-center">{error}</p>
+          )}
 
-          <form className="space-y-4" method="post" onSubmit={handleSubmit}>
-            <div className="text-left">
-              <label
-                htmlFor="name"
-                className="block mb-2 text-lg text-gray-700"
-              >
-                Name
-              </label>
+          <form className="space-y-5" onSubmit={handleSubmit}>
+            <div>
+              <label className="block mb-2 text-sm text-gray-400">Name</label>
               <input
-                id="name"
                 type="text"
-                placeholder="Name"
                 required
-                className="w-full p-3 border rounded-lg shadow-md border-gray-300 placeholder:text-base focus:scale-105 transition duration-300 ease-in-out"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                placeholder="John Doe"
+                className="w-full p-3 rounded-lg bg-black border border-white/20 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/40 transition"
               />
             </div>
 
-            <div className="text-left">
-              <label
-                htmlFor="email"
-                className="block mb-2 text-lg text-gray-700"
-              >
-                Email
-              </label>
+            <div>
+              <label className="block mb-2 text-sm text-gray-400">Email</label>
               <input
-                id="email"
                 type="email"
-                placeholder="Email"
                 required
-                className="w-full p-3 border rounded-lg shadow-md border-gray-300 placeholder:text-base focus:scale-105 transition duration-300 ease-in-out"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                className="w-full p-3 rounded-lg bg-black border border-white/20 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/40 transition"
               />
             </div>
 
-            <div className="text-left">
-              <label
-                htmlFor="password"
-                className="block mb-2 text-lg text-gray-700"
-              >
+            <div>
+              <label className="block mb-2 text-sm text-gray-400">
                 Password
               </label>
               <input
-                id="password"
                 type="password"
-                placeholder="Password"
                 required
-                className="w-full p-3 border rounded-lg shadow-md border-gray-300 placeholder:text-base focus:scale-105 transition duration-300 ease-in-out"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                className="w-full p-3 rounded-lg bg-black border border-white/20 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/40 transition"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full p-3 text-white bg-black rounded-lg shadow-lg mt-6 hover:scale-105 transition duration-300 ease-in-out"
+              disabled={loading}
+              className="w-full py-3 rounded-lg bg-white text-black font-semibold tracking-wide hover:bg-gray-200 transition disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              REGISTER
+              {loading ? "Signing up..." : "SIGN UP"}
             </button>
           </form>
 
-          {/* Log In Link */}
-          <div className="flex flex-col items-center justify-center mt-4 text-sm">
-            <p>
-              <span className="text-gray-600">Have an account?</span>
-              <Link className="text-blue-500 hover:underline" to={`/login`}>
-                Login
-              </Link>
-            </p>
+          {/* Login link */}
+          <div className="mt-6 text-center text-sm text-gray-400">
+            Already have an account?{" "}
+            <Link to="/login" className="text-white hover:underline">
+              Login
+            </Link>
           </div>
 
-          {/* Third-party Auth */}
-          <div className="flex flex-wrap items-center justify-center mt-5 gap-3">
+          {/* Social login */}
+          <div className="flex justify-center gap-4 mt-6">
             {[
-              {
-                alt: "Google",
-                src: "https://ucarecdn.com/8f25a2ba-bdcf-4ff1-b596-088f330416ef/",
-              },
-              {
-                alt: "GitHub",
-                src: "https://ucarecdn.com/be5b0ffd-85e8-4639-83a6-5162dfa15a16/",
-              },
-              {
-                alt: "Apple",
-                src: "https://ucarecdn.com/3277d952-8e21-4aad-a2b7-d484dad531fb/",
-              },
-            ].map((item, idx) => (
+              "https://ucarecdn.com/8f25a2ba-bdcf-4ff1-b596-088f330416ef/",
+              "https://ucarecdn.com/be5b0ffd-85e8-4639-83a6-5162dfa15a16/",
+              "https://ucarecdn.com/3277d952-8e21-4aad-a2b7-d484dad531fb/",
+            ].map((src, idx) => (
               <button
                 key={idx}
-                type="button"
-                className="p-2 rounded-lg shadow-lg hover:scale-105 transition duration-300 ease-in-out"
+                className="p-3 rounded-full bg-black border border-white/20 hover:bg-white hover:text-black transition"
               >
-                <img src={item.src} alt={item.alt} className="w-6 h-6" />
+                <img src={src} className="w-5 h-5" />
               </button>
             ))}
           </div>
 
-          {/* Terms and Privacy */}
-          <div className="mt-4 text-sm text-gray-500 text-center">
-            <p>
-              By signing in, you agree to our{" "}
-              <a href="#" className="text-blue-400 group transition-all">
-                <span className="bg-left-bottom bg-gradient-to-r from-blue-400 to-blue-400 bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out">
-                  Terms
-                </span>
-              </a>{" "}
-              and{" "}
-              <a href="#" className="text-blue-400 group transition-all">
-                <span className="bg-left-bottom bg-gradient-to-r from-blue-400 to-blue-400 bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out">
-                  Privacy Policy
-                </span>
-              </a>
-            </p>
-          </div>
+          {/* Terms */}
+          <p className="mt-6 text-xs text-gray-500 text-center leading-relaxed">
+            By signing up, you agree to our{" "}
+            <span className="underline cursor-pointer">Terms</span> and{" "}
+            <span className="underline cursor-pointer">Privacy Policy</span>.
+          </p>
         </div>
       </div>
 
       {/* Right: Image Section */}
-      <div className="hidden lg:flex w-full lg:w-1/2 h-full">
+      <div className="hidden lg:flex w-1/2 items-center justify-center">
         <img
           src={SignupImg}
           alt="Signup Visual"
-          className="w-full h-[750px] object-cover"
+          className="h-3/4 object-cover rounded-3xl opacity-90 shadow-2xl"
         />
       </div>
     </div>

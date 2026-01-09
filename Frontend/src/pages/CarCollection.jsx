@@ -4,13 +4,15 @@ import { useParams, useSearchParams } from "react-router-dom";
 import CarFilterSidebar from "../components/Cars/CarFilterSidebar.jsx";
 import CarGrid from "../components/Cars/CarGrid.jsx";
 import SortOptions from "../components/Cars/SortOptions.jsx";
-import carData from "../assets/data/carData.js";
+import api from "../utils/api";
 
 const CarCollectionPage = () => {
   const { collection } = useParams();
   const [searchParams] = useSearchParams();
+  const [cars, setCars] = useState([]);
   const [filteredCars, setFilteredCars] = useState([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
   const SideBarRef = useRef(null);
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
@@ -22,6 +24,19 @@ const CarCollectionPage = () => {
   };
 
   useEffect(() => {
+    const fetchCars = async () => {
+      try {
+        const { data } = await api.get('/cars');
+        setCars(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching cars:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchCars();
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
@@ -29,11 +44,11 @@ const CarCollectionPage = () => {
   // Filter cars based on URL params
   useEffect(() => {
     const queryParams = Object.fromEntries([...searchParams]);
-    let filtered = [...carData];
+    let filtered = [...cars];
 
     if (queryParams.brand) {
       const brands = queryParams.brand.split(",");
-      filtered = filtered.filter((car) => brands.includes(car.brand));
+      filtered = filtered.filter((car) => brands.includes(car.make));
     }
     if (queryParams.type) {
       filtered = filtered.filter((car) => car.type === queryParams.type);
@@ -56,7 +71,7 @@ const CarCollectionPage = () => {
     const minPrice = Number(queryParams.minPrice) || 0;
     const maxPrice = Number(queryParams.maxPrice) || Infinity;
     filtered = filtered.filter(
-      (car) => car.price >= minPrice && car.price <= maxPrice
+      (car) => car.pricePerDay >= minPrice && car.pricePerDay <= maxPrice
     );
 
     if (collection) {
@@ -66,7 +81,7 @@ const CarCollectionPage = () => {
     }
 
     setFilteredCars(filtered);
-  }, [searchParams, collection]);
+  }, [searchParams, collection, cars]);
 
   return (
     <div className="flex flex-col lg:flex-row bg-black">
@@ -99,7 +114,11 @@ const CarCollectionPage = () => {
         <SortOptions />
 
         {/* Car Grid */}
-        <CarGrid products={filteredCars} />
+        {loading ? (
+          <p className="text-white">Loading...</p>
+        ) : (
+          <CarGrid products={filteredCars} />
+        )}
       </div>
     </div>
   );

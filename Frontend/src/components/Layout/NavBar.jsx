@@ -5,13 +5,23 @@ import {
   HiBars3BottomRight,
 } from "react-icons/hi2";
 import { IoMdClose } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../redux/authSlice";
 
 const NavBar = () => {
   const [navDrawerOpen, setNavDrawerOpen] = useState(false);
+  const { userInfo } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const toggleNavDrawer = () => {
     setNavDrawerOpen((prev) => !prev);
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/");
   };
 
   return (
@@ -48,19 +58,53 @@ const NavBar = () => {
         >
           Sedan
         </Link>
+        <Link
+          to="/my-bookings"
+          className="text-sm font-medium uppercase text-white hover:text-gray-400"
+        >
+          My Bookings
+        </Link>
       </div>
 
       {/* Right Icons */}
       <div className="flex items-center space-x-4">
-        {/* Profile */}
-        <Link to="/profile" className="text-white hover:text-gray-400">
-          <HiOutlineUser className="h-6 w-6" />
-        </Link>
+        {/* Profile - only show if logged in */}
+        {userInfo && (
+          <Link to="/profile" className="text-white hover:text-gray-400">
+            <HiOutlineUser className="h-6 w-6" />
+          </Link>
+        )}
 
         {/* Chat Icon */}
         <Link to="/chat" className="text-white hover:text-gray-400">
           <HiOutlineChatBubbleLeftRight className="h-6 w-6" />
         </Link>
+
+        {/* Authentication Buttons */}
+        {userInfo ? (
+          <button
+            onClick={handleLogout}
+            className="text-white hover:text-gray-400 text-sm font-medium"
+          >
+            Logout
+          </button>
+        ) : (
+          <div className="flex space-x-2">
+            <Link
+              to="/login"
+              className="text-white hover:text-gray-400 text-sm font-medium"
+            >
+              Login
+            </Link>
+            <span className="text-white">|</span>
+            <Link
+              to="/signup"
+              className="text-white hover:text-gray-400 text-sm font-medium"
+            >
+              Signup
+            </Link>
+          </div>
+        )}
 
         {/* Mobile Menu Button */}
         <button className="md:hidden" onClick={toggleNavDrawer}>
@@ -117,6 +161,52 @@ const NavBar = () => {
             >
               Chat
             </Link>
+            {userInfo && (
+              <Link
+                to="/profile"
+                onClick={toggleNavDrawer}
+                className="block text-gray-600 hover:text-black"
+              >
+                Profile
+              </Link>
+            )}
+            {userInfo && (
+              <Link
+                to="/my-bookings"
+                onClick={toggleNavDrawer}
+                className="block text-gray-600 hover:text-black"
+              >
+                My Bookings
+              </Link>
+            )}
+            {!userInfo ? (
+              <>
+                <Link
+                  to="/login"
+                  onClick={toggleNavDrawer}
+                  className="block text-gray-600 hover:text-black"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/signup"
+                  onClick={toggleNavDrawer}
+                  className="block text-gray-600 hover:text-black"
+                >
+                  Signup
+                </Link>
+              </>
+            ) : (
+              <button
+                onClick={() => {
+                  handleLogout();
+                  toggleNavDrawer();
+                }}
+                className="block text-gray-600 hover:text-black text-left w-full"
+              >
+                Logout
+              </button>
+            )}
           </nav>
         </div>
       </div>

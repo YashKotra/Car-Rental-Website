@@ -11,7 +11,7 @@ const carData = [
     price: 8999900,
     images: [
       {
-        url: "https://www.tesla.com/sites/default/files/modelsx-new/social/model-s-hero-social.jpg",
+        url: "https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=800",
       },
     ],
   },
@@ -26,7 +26,7 @@ const carData = [
     price: 7599000,
     images: [
       {
-        url: "https://hips.hearstapps.com/hmg-prod/images/2024-bmw-x5-110-1675722850.jpg",
+        url: "https://images.unsplash.com/photo-1603189661342-e45f1374f890?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=776",
       },
     ],
   },
@@ -41,7 +41,7 @@ const carData = [
     price: 8499000,
     images: [
       {
-        url: "https://cdn.motor1.com/images/mgl/nB7z1/s3/2020-audi-q7-facelift.jpg",
+        url: "https://images.unsplash.com/photo-1632823468858-40eb9b80198f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YXVkaSUyMHE3fGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600",
       },
     ],
   },
@@ -56,7 +56,7 @@ const carData = [
     price: 7999000,
     images: [
       {
-        url: "https://stimg.cardekho.com/images/carexteriorimages/930x620/Mercedes-Benz/GLE/10963/1704790685300/front-left-side-47.jpg",
+        url: "https://images.unsplash.com/photo-1610099610040-ab19f3a5ec35?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=928",
       },
     ],
   },
@@ -71,7 +71,7 @@ const carData = [
     price: 6999000,
     images: [
       {
-        url: "https://media.ford.com/content/fordmedia/fna/us/en/news/2024/03/27/2025-mustang-gtd.html/jcr:content/image.img.1024.high.jpg",
+        url: "https://images.unsplash.com/photo-1611016186353-9af58c69a533?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1471",
       },
     ],
   },
@@ -86,7 +86,7 @@ const carData = [
     price: 6499000,
     images: [
       {
-        url: "https://cdn.motor1.com/images/mgl/MkB0b/s3/2020-chevrolet-camaro-ss.jpg",
+        url: "https://images.unsplash.com/photo-1573074617613-fc8ef27eaa2f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=928",
       },
     ],
   },
@@ -101,7 +101,7 @@ const carData = [
     price: 24999000,
     images: [
       {
-        url: "https://cdn.motor1.com/images/mgl/kL1jP/s1/lamborghini-huracan-evo-rwd.jpg",
+        url: "https://images.unsplash.com/photo-1621285853634-713b8dd6b5fd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1287",
       },
     ],
   },
@@ -116,7 +116,7 @@ const carData = [
     price: 19999000,
     images: [
       {
-        url: "https://files.porsche.com/filestore/image/multimedia/none/992-c2-modelimage-sideshot/model/f29c6a5c-fc67-11eb-80e6-005056bbdc38/porsche-model.png",
+        url: "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1470",
       },
     ],
   },
@@ -131,7 +131,7 @@ const carData = [
     price: 4599000,
     images: [
       {
-        url: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Ioniq5/Hero-Image/ioniq5-pc-1.jpg",
+        url: "https://images.unsplash.com/photo-1694676518566-874b80d2d160?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=774",
       },
     ],
   },
@@ -146,7 +146,7 @@ const carData = [
     price: 4799000,
     images: [
       {
-        url: "https://imgd.aeplcdn.com/370x208/n/cw/ec/145615/toyota-fortuner-right-front-three-quarter3.jpeg",
+        url: "https://images.unsplash.com/photo-1664783856972-ac9922d7b2d3?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=870",
       },
     ],
   },

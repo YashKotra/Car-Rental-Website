@@ -1,177 +1,285 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import api from "../../utils/api";
+import MapComponent from "../Common/Map";
 
-const car = {
-  name: "Tesla Model 3",
-  description:
-    "Experience electric luxury with the Tesla Model 3 – smooth, silent, and smart driving.",
-  pricePerDay: 4500,
-  images: [
-    {
-      url: "https://images.unsplash.com/photo-1620891549027-942fdc95d3f5?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=774",
-      alt: "Front view of Tesla Model 3",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1553260188-75a8d6205b6c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1740",
-      alt: "Side view of Tesla Model 3",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1604164448130-d1df213c64eb?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=870",
-      alt: "Interior of Tesla Model 3",
-    },
-  ],
-  colors: ["Red", "White", "Black"],
-  specs: {
-    age: "2 - 3 year(s) old",
-    seats: "5 seats",
-    luggage: "2 large bags, 2 small bags",
-    battery: "54 kWh battery",
-    transmission: "Automatic",
-    fuelType: "Electric",
-    range: "350km range (est)",
-    drivetrain: "Full Electric",
-    safety: "5-Star ANCAP Safety Rating",
-    interior: "Luxury Interior",
-    infotainment: "15.4-inch Touchscreen Infotainment",
-    roof: "Glass Roof Sunshade",
-  },
+const LOCATION_COORDS = {
+  "Sector 17, Chandigarh": { lat: 30.7333, lng: 76.7794 },
+  "Sector 47, Chandigarh": { lat: 30.699, lng: 76.758 },
+  Mohali: { lat: 30.7046, lng: 76.7179 },
+  Kharar: { lat: 30.749, lng: 76.6578 },
+  Airport: { lat: 30.6735, lng: 76.7885 },
 };
 
 const CarDetail = () => {
-  const [mainImg, setMainImg] = useState(car.images[0]?.url || null);
-  const [selectedColor, setSelectedColor] = useState("");
-  const [rentalDays, setRentalDays] = useState(1);
-  const [isButtonDisabled, setButtonDisabled] = useState(false);
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { userInfo } = useSelector((state) => state.auth);
 
-  const handleIncrement = () => {
-    setRentalDays((prev) => prev + 1);
+  const [car, setCar] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [pickupLocation, setPickupLocation] = useState("Sector 17, Chandigarh");
+  const [isBooking, setIsBooking] = useState(false);
+
+  // Get coordinates for current selection
+  const coords =
+    LOCATION_COORDS[pickupLocation] || LOCATION_COORDS["Sector 17, Chandigarh"];
+
+  useEffect(() => {
+    const fetchCar = async () => {
+      try {
+        const { data } = await api.get(`/cars/${id}`);
+        setCar(data);
+      } catch (err) {
+        setError("Failed to fetch car details");
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCar();
+  }, [id]);
+
+  useEffect(() => {
+    if (startDate && endDate && car) {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      const diffTime = end - start;
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+      if (diffDays > 0) {
+        setTotalPrice(diffDays * car.pricePerDay);
+      } else {
+        setTotalPrice(0);
+      }
+    } else {
+      setTotalPrice(0);
+    }
+  }, [startDate, endDate, car]);
+
+  const handleBookNow = async () => {
+    if (!userInfo) {
+      navigate("/login");
+      return;
+    }
+    if (!startDate || !endDate) {
+      alert("Please select start and end dates");
+      return;
+    }
+    if (totalPrice <= 0) {
+      alert("Invalid duration");
+      return;
+    }
+
+    setIsBooking(true);
+
+    try {
+      // 1. Create Booking
+      const bookingData = {
+        carId: car._id,
+        startDate,
+        endDate,
+        totalPrice,
+        pickupLocation: {
+          type: "Point",
+          coordinates: [coords.lng, coords.lat],
+          address: pickupLocation,
+        },
+      };
+
+      const { data: booking } = await api.post("/bookings", bookingData);
+
+      // 2. Create Razorpay Order
+      const {
+        data: { key },
+      } = await api.get("/payment/key");
+      const { data: order } = await api.post("/payment/create-order", {
+        amount: totalPrice,
+        bookingId: booking._id,
+      });
+
+      // 3. Open Razorpay
+      const options = {
+        key: key,
+        amount: order.amount,
+        currency: order.currency,
+        name: "Car Rental",
+        description: `Booking for ${car.make} ${car.model}`,
+        image: car.imageUrl,
+        order_id: order.id,
+        handler: async function (response) {
+          try {
+            await api.post("/payment/verify", {
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+              bookingId: booking._id,
+            });
+            alert("Booking confirmed successfully!");
+            navigate("/my-bookings"); // Redirect to My Bookings
+          } catch (err) {
+            console.error(err);
+            alert("Payment verification failed");
+          }
+        },
+        prefill: {
+          name: userInfo.name,
+          email: userInfo.email,
+        },
+        theme: {
+          color: "#000000",
+        },
+      };
+
+      const rzp1 = new window.Razorpay(options);
+      rzp1.open();
+    } catch (err) {
+      console.error(err);
+      alert("Booking failed: " + (err.response?.data?.message || err.message));
+    } finally {
+      setIsBooking(false);
+    }
   };
 
-  const handleDecrement = () => {
-    setRentalDays((prev) => (prev > 1 ? prev - 1 : 1));
-  };
+  if (loading)
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-black text-white">
+        Loading...
+      </div>
+    );
+  if (error)
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-black text-red-500">
+        {error}
+      </div>
+    );
+  if (!car)
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-black text-white">
+        Car not found
+      </div>
+    );
 
-  const handleBookNow = () => {
-    setButtonDisabled(true);
-    setTimeout(() => {
-      alert(`Car booked for ${rentalDays} day(s)!`);
-      setButtonDisabled(false);
-    }, 1500);
-  };
+  const warehouseLng = car.location?.coordinates?.[0];
+  const warehouseLat = car.location?.coordinates?.[1];
 
   return (
     <div className="p-6 bg-black min-h-screen">
       <div className="max-w-6xl mx-auto bg-black p-8 rounded-lg text-white">
-        <div className="flex flex-col md:flex-row">
-          {/* Thumbnails (Desktop) */}
-          <div className="hidden md:flex flex-col space-y-4 mr-6">
-            {car.images?.map((image, idx) => (
-              <img
-                key={idx}
-                src={image.url}
-                alt={image.alt || car.name}
-                onClick={() => setMainImg(image.url)}
-                className={`w-64 h-64 object-cover rounded-lg cursor-pointer border-2 ${
-                  mainImg === image.url ? "border-white" : "border-gray-600"
-                }`}
-              />
-            ))}
-          </div>
-
+        <div className="flex flex-col md:flex-row gap-8">
           {/* Main Image */}
-          <div className="md:w-1/2 flex">
-            {mainImg ? (
-              <img
-                src={mainImg}
-                alt={car.name}
-                className="w-full h-full object-cover rounded-lg border-4 border-white"
-              />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center bg-gray-800 rounded-lg">
-                <p className="text-gray-400">Image not available</p>
-              </div>
-            )}
-          </div>
-
-          {/* Mobile Thumbnails */}
-          <div className="md:hidden flex overflow-x-scroll space-x-4 mb-4 mt-4">
-            {car.images?.map((image, idx) => (
-              <img
-                key={idx}
-                src={image.url}
-                alt={car.name}
-                onClick={() => setMainImg(image.url)}
-                className={`w-32 h-32 object-cover rounded-lg cursor-pointer border-2 ${
-                  mainImg === image.url ? "border-white" : "border-gray-600"
-                }`}
-              />
-            ))}
+          <div className="md:w-1/2 flex flex-col gap-6">
+            <img
+              src={car.imageUrl}
+              alt={`${car.make} ${car.model}`}
+              className="w-full h-auto object-cover rounded-lg border-4 border-white"
+            />
+            {/* Map Integration */}
+            <MapComponent
+              longitude={coords.lng}
+              latitude={coords.lat}
+              zoom={13}
+            />
+            <p className="text-sm text-gray-400 text-center">
+              Pickup Location: {pickupLocation}
+            </p>
+            {typeof warehouseLat === "number" &&
+              typeof warehouseLng === "number" && (
+                <>
+                  <MapComponent
+                    longitude={warehouseLng}
+                    latitude={warehouseLat}
+                    zoom={13}
+                  />
+                  <p className="text-sm text-gray-400 text-center">
+                    Warehouse: {car.location?.address || "Assigned location"}
+                  </p>
+                </>
+              )}
           </div>
 
           {/* Car Info */}
-          <div className="md:w-1/2 md:ml-10">
-            <h1 className="text-3xl font-semibold mb-2">{car.name}</h1>
+          <div className="md:w-1/2">
+            <h1 className="text-4xl font-semibold mb-2">
+              {car.make} {car.model}
+            </h1>
+            <p className="text-xl text-gray-400 mb-4">{car.year}</p>
 
-            <p className="text-xl text-white mb-2 ml-1">
-              ₹{car.pricePerDay} / day
+            <p className="text-2xl text-white mb-4">
+              ₹{car.pricePerDay.toLocaleString()} / day
             </p>
 
-            <p className="text-md text-gray-300 mb-4">{car.description}</p>
+            <p className="text-md text-gray-300 mb-6">{car.description}</p>
 
-            {/* Color Selection */}
-            {car.colors?.length > 0 && (
-              <div className="mb-4">
-                <p className="text-white">Available Colors:</p>
-                <div className="flex gap-2 mt-2">
-                  {car.colors.map((color) => (
-                    <button
-                      key={color}
-                      onClick={() => setSelectedColor(color)}
-                      className={`w-8 h-8 rounded-full border ${
-                        selectedColor === color
-                          ? "ring-2 ring-offset-2 ring-white"
-                          : "border-gray-500"
-                      }`}
-                      style={{
-                        backgroundColor: color.toLowerCase(),
-                        filter: "brightness(0.85)",
-                      }}
-                    ></button>
-                  ))}
-                </div>
+            {/* Date Selection */}
+            <div className="mb-6 grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-gray-400 mb-1">Start Date</label>
+                <input
+                  type="date"
+                  value={startDate}
+                  min={new Date().toISOString().split("T")[0]}
+                  onChange={(e) => setStartDate(e.target.value)}
+                  className="w-full p-2 bg-gray-800 text-white rounded border border-gray-600 focus:border-white focus:outline-none"
+                />
+              </div>
+              <div>
+                <label className="block text-gray-400 mb-1">End Date</label>
+                <input
+                  type="date"
+                  value={endDate}
+                  min={startDate || new Date().toISOString().split("T")[0]}
+                  onChange={(e) => setEndDate(e.target.value)}
+                  className="w-full p-2 bg-gray-800 text-white rounded border border-gray-600 focus:border-white focus:outline-none"
+                />
+              </div>
+            </div>
+
+            {totalPrice > 0 && (
+              <div className="mb-6 p-4 bg-gray-900 rounded border border-gray-700">
+                <p className="text-gray-400">Total Price:</p>
+                <p className="text-3xl font-bold text-white">
+                  ₹{totalPrice.toLocaleString()}
+                </p>
               </div>
             )}
 
-            {/* Rental Duration */}
             <div className="mb-6">
-              <p className="text-white">Rental Duration (days):</p>
-              <div className="flex items-center space-x-4 mt-2">
-                <button
-                  onClick={handleDecrement}
-                  className="px-3 py-1 bg-gray-700 text-white rounded text-lg hover:bg-white hover:text-black transition"
-                >
-                  -
-                </button>
-                <span className="text-lg">{rentalDays}</span>
-                <button
-                  onClick={handleIncrement}
-                  className="px-3 py-1 bg-gray-700 text-white rounded text-lg hover:bg-white hover:text-black transition"
-                >
-                  +
-                </button>
-              </div>
+              <p className="text-white mb-2">Select Pick up location</p>
+              <select
+                value={pickupLocation}
+                onChange={(e) => setPickupLocation(e.target.value)}
+                className="w-full p-3 bg-gray-800 text-white rounded border border-gray-600 focus:border-white focus:outline-none"
+              >
+                {Object.keys(LOCATION_COORDS).map((loc) => (
+                  <option key={loc} value={loc}>
+                    {loc}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {/* Book Now Button */}
             <button
               onClick={handleBookNow}
-              disabled={isButtonDisabled}
+              disabled={isBooking}
               className={`bg-white text-black py-3 px-6 rounded w-full mb-4 font-semibold text-lg transition ${
-                isButtonDisabled
+                isBooking
                   ? "cursor-not-allowed opacity-50"
                   : "hover:bg-gray-300"
               }`}
             >
-              {isButtonDisabled ? "Booking..." : "BOOK NOW"}
+              {isBooking
+                ? "Processing..."
+                : `BOOK NOW ${
+                    totalPrice > 0 ? `(₹${totalPrice.toLocaleString()})` : ""
+                  }`}
             </button>
 
             {/* Specifications */}
@@ -179,14 +287,30 @@ const CarDetail = () => {
               <h3 className="text-xl font-bold mb-4">Specifications:</h3>
               <table className="w-full text-left text-sm text-white border-t border-gray-700">
                 <tbody>
-                  {Object.entries(car.specs).map(([key, value]) => (
-                    <tr key={key} className="border-b border-gray-700">
-                      <td className="py-2 font-medium capitalize pr-4">
-                        {key.replace(/([A-Z])/g, " $1")}
+                  <tr className="border-b border-gray-700">
+                    <td className="py-2 font-medium">Type</td>
+                    <td className="py-2 text-gray-300">{car.type}</td>
+                  </tr>
+                  <tr className="border-b border-gray-700">
+                    <td className="py-2 font-medium">Transmission</td>
+                    <td className="py-2 text-gray-300">{car.transmission}</td>
+                  </tr>
+                  <tr className="border-b border-gray-700">
+                    <td className="py-2 font-medium">Fuel Type</td>
+                    <td className="py-2 text-gray-300">{car.fuelType}</td>
+                  </tr>
+                  <tr className="border-b border-gray-700">
+                    <td className="py-2 font-medium">Seats</td>
+                    <td className="py-2 text-gray-300">{car.seats}</td>
+                  </tr>
+                  {car.features && car.features.length > 0 && (
+                    <tr className="border-b border-gray-700">
+                      <td className="py-2 font-medium">Features</td>
+                      <td className="py-2 text-gray-300">
+                        {car.features.join(", ")}
                       </td>
-                      <td className="py-2 text-gray-300">{value}</td>
                     </tr>
-                  ))}
+                  )}
                 </tbody>
               </table>
             </div>

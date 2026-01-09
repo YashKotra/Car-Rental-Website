@@ -133,8 +133,8 @@ export default function Footer() {
 
       {/* Copyright */}
       <div className="mt-10 border-t border-gray-700 pt-6 text-center text-sm text-gray-500">
-        &copy; {new Date().getFullYear()} Powered by{" "}
-        <span className="text-white font-medium">Yash Kotra Rentals</span>. All
+        &copy; {new Date().getFullYear()} Made and Designed by{" "}
+        <span className="text-white font-medium">Yash Kotra</span>. All
         rights reserved.
       </div>
     </footer>

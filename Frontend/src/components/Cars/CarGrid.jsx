@@ -9,13 +9,13 @@ const CarGrid = ({ products = [] }) => {
             <div className="p-4 border-4 border-white rounded-xl hover:shadow-lg transition">
               <div className="w-full h-96 mb-4">
                 <img
-                  src={product.images[0]?.url}
-                  alt={product.name}
+                  src={product.imageUrl}
+                  alt={product.make + ' ' + product.model}
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h2 className="text-lg font-semibold text-white">{product.name}</h2>
-              <p className="text-white">₹{product.price.toLocaleString()}</p>
+              <h2 className="text-lg font-semibold text-white">{product.make} {product.model}</h2>
+              <p className="text-white">₹{product.pricePerDay.toLocaleString()}</p>
             </div>
           </Link>
         ))

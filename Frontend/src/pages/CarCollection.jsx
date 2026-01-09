@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FaFilter } from "react-icons/fa";
 import { useParams, useSearchParams } from "react-router-dom";
-import CarFilterSidebar from "../components/Cars/CarFilterSidebar.jsx";
+import CarFilterSidebar from "../components/Cars/CarFilterSideBar.jsx";
 import CarGrid from "../components/Cars/CarGrid.jsx";
 import SortOptions from "../components/Cars/SortOptions.jsx";
 import api from "../utils/api";

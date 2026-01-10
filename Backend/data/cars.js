@@ -48,7 +48,7 @@ const cars = [
     year: 2022,
     pricePerDay: 150,
     imageUrl:
-      "https://images.unsplash.com/photo-1584345604480-83d6fa8f33e7?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1547744152-14d985cb937f?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3Dhttps://images.unsplash.com/photo-1547744152-14d985cb937f?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     available: true,
     transmission: "Automatic",
     fuelType: "Petrol",
@@ -68,7 +68,7 @@ const cars = [
     year: 2023,
     pricePerDay: 200,
     imageUrl:
-      "https://images.unsplash.com/photo-1552519507-da8b12273528?auto=format&fit=crop&w=800&q=80", // Camaro image but looks sporty
+      "https://images.unsplash.com/photo-1654012261389-8065f6412ac7?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Camaro image but looks sporty
     available: true,
     transmission: "Manual",
     fuelType: "Petrol",
@@ -110,7 +110,7 @@ const cars = [
     year: 2024,
     pricePerDay: 110,
     imageUrl:
-      "https://images.unsplash.com/photo-1626077388041-33218b7987a2?auto=format&fit=crop&w=800&q=80", // Generic SUV
+      "https://images.unsplash.com/photo-1716068072348-64c2b7181161?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Generic SUV
     available: true,
     transmission: "Automatic",
     fuelType: "Hybrid",
@@ -194,7 +194,7 @@ const cars = [
     year: 2023,
     pricePerDay: 300,
     imageUrl:
-      "https://images.unsplash.com/photo-1603584173870-7b299f58938d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1655126275641-21e114342284?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     available: true,
     transmission: "Automatic",
     fuelType: "Electric",
@@ -258,7 +258,7 @@ const cars = [
     year: 2023,
     pricePerDay: 350,
     imageUrl:
-      "https://images.unsplash.com/photo-1503376763036-066120622c74?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1564694457220-0efef1a70d6d?q=80&w=930&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     available: true,
     transmission: "Automatic",
     fuelType: "Petrol",

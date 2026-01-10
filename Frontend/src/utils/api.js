@@ -1,24 +1,26 @@
 import axios from "axios";
 
-const VITE_BACKEND_URL = "http://localhost:4000/api";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const api = axios.create({
-  baseURL: VITE_BACKEND_URL,
+  baseURL: BASE_URL, // ✅ FIXED
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-// Add a request interceptor to inject the token
+// Request interceptor to add JWT token
 api.interceptors.request.use(
   (config) => {
-    const userInfo = localStorage.getItem("userInfo")
-      ? JSON.parse(localStorage.getItem("userInfo"))
-      : null;
+    const userInfo = localStorage.getItem("userInfo");
 
-    if (userInfo && userInfo.token) {
-      config.headers.Authorization = `Bearer ${userInfo.token}`;
+    if (userInfo) {
+      const parsedUser = JSON.parse(userInfo);
+      if (parsedUser?.token) {
+        config.headers.Authorization = `Bearer ${parsedUser.token}`;
+      }
     }
+
     return config;
   },
   (error) => Promise.reject(error)

@@ -100,17 +100,19 @@ const verifyPayment = async (req, res) => {
       return res.status(404).json({ message: "Booking not found" });
     }
 
-    if (String(booking.user) !== String(req.user._id) && !req.user.isAdmin) {
-      return res.status(403).json({ message: "Not authorized" });
-    }
-
     booking.paymentId = razorpay_payment_id;
     booking.paymentStatus = "completed";
-    booking.status = "confirmed";
+    booking.status = "confirmed"; // Auto-confirm after payment
+
+    // Generate Pickup Token (6 chars alphanumeric)
+    booking.pickupToken = crypto.randomBytes(3).toString("hex").toUpperCase();
 
     await booking.save();
 
-    return res.json({ message: "Payment verified successfully" });
+    res.json({
+      message: "Payment verified successfully",
+      pickupToken: booking.pickupToken,
+    });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Payment verification failed" });

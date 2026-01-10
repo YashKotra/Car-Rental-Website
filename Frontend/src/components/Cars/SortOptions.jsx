@@ -9,7 +9,7 @@ const SortOptions = () => {
     setSearchParams(searchParams);
   };
   return (
-    <div className="mb-6 flex itms-center justify-end text-white bg-black">
+    <div className="mb-6 flex items-center justify-end text-white bg-black">
       <select
         onChange={handleSortChange}
         value={searchParams.get("sortBy") || ""}

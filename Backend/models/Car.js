@@ -34,6 +34,9 @@ const carSchema = mongoose.Schema(
     description: { type: String },
     features: [String],
     type: { type: String, required: true }, // SUV, Sedan, etc.
+    averageRating: { type: Number, default: 0 },
+    numReviews: { type: Number, default: 0 },
+    isBestSeller: { type: Boolean, default: false },
   },
   {
     timestamps: true,

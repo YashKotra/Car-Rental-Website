@@ -91,6 +91,13 @@ const MyBookings = () => {
                       <p className="text-gray-500">Pickup</p>
                       <p>{booking.pickupLocation?.address || "N/A"}</p>
                     </div>
+                    {booking.pickupToken && (
+                      <div className="col-span-2 mt-2 p-2 bg-green-900 rounded border border-green-700 text-center">
+                        <p className="text-green-300 text-xs uppercase tracking-wider">Pickup Token</p>
+                        <p className="text-white text-xl font-mono font-bold tracking-widest">{booking.pickupToken}</p>
+                        <p className="text-green-300 text-xs">Show this token during car pickup</p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

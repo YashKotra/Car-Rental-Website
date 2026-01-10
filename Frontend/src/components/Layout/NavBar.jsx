@@ -64,6 +64,18 @@ const NavBar = () => {
         >
           My Bookings
         </Link>
+        <Link
+          to="/about"
+          className="text-sm font-medium uppercase text-white hover:text-gray-400"
+        >
+          About
+        </Link>
+        <Link
+          to="/contact"
+          className="text-sm font-medium uppercase text-white hover:text-gray-400"
+        >
+          Contact
+        </Link>
       </div>
 
       {/* Right Icons */}

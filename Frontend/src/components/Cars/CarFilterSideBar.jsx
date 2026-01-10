@@ -67,7 +67,6 @@ const CarFilterSidebar = () => {
     if (filters.minPrice) params.set("minPrice", filters.minPrice);
     if (filters.maxPrice) params.set("maxPrice", filters.maxPrice);
     setSearchParams(params);
-    navigate(`?${params.toString()}`);
   };
 
   const handleFilterChange = (e) => {

@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import api from "../../utils/api";
 import MapComponent from "../Common/Map";
+import ReviewSection from "../Reviews/ReviewSection";
+import Reviews from "./Reviews";
 
 const LOCATION_COORDS = {
   "Sector 17, Chandigarh": { lat: 30.7333, lng: 76.7794 },
@@ -169,6 +172,20 @@ const CarDetail = () => {
   const warehouseLng = car.location?.coordinates?.[0];
   const warehouseLat = car.location?.coordinates?.[1];
 
+  const renderStars = (rating) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      if (i <= rating) {
+        stars.push(<FaStar key={i} />);
+      } else if (i === Math.ceil(rating) && !Number.isInteger(rating)) {
+        stars.push(<FaStarHalfAlt key={i} />);
+      } else {
+        stars.push(<FaRegStar key={i} />);
+      }
+    }
+    return stars;
+  };
+
   return (
     <div className="p-6 bg-black min-h-screen">
       <div className="max-w-6xl mx-auto bg-black p-8 rounded-lg text-white">
@@ -209,6 +226,16 @@ const CarDetail = () => {
             <h1 className="text-4xl font-semibold mb-2">
               {car.make} {car.model}
             </h1>
+
+            <div className="flex items-center mb-4">
+              <div className="flex text-yellow-400 mr-2 text-lg">
+                {renderStars(car.averageRating || 0)}
+              </div>
+              <span className="text-gray-400 text-sm">
+                ({car.numReviews || 0} reviews)
+              </span>
+            </div>
+
             <p className="text-xl text-gray-400 mb-4">{car.year}</p>
 
             <p className="text-2xl text-white mb-4">
@@ -315,6 +342,11 @@ const CarDetail = () => {
               </table>
             </div>
           </div>
+        </div>
+
+        {/* Reviews Section */}
+        <div className="mt-12">
+          <Reviews carId={car._id} />
         </div>
       </div>
     </div>

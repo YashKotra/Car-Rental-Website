@@ -33,6 +33,7 @@ const bookingSchema = mongoose.Schema({
   },
   paymentId: { type: String },
   paymentStatus: { type: String, default: 'pending' },
+  pickupToken: { type: String },
 }, {
   timestamps: true,
 });

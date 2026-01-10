@@ -12,6 +12,8 @@ import AdminDashboard from "./pages/Admin/AdminDashboard";
 import AdminBookings from "./pages/Admin/AdminBookings";
 import AdminCars from "./pages/Admin/AdminCars";
 import AdminUsers from "./pages/Admin/AdminUsers";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 const App = () => {
   return (
@@ -26,6 +28,8 @@ const App = () => {
           <Route path="car/:id" element={<CarDetail />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
+          <Route path="about" element={<About />} />
+          <Route path="contact" element={<Contact />} />
         </Route>
 
         {/* Admin Routes */}

@@ -27,7 +27,12 @@ const CarCollectionPage = () => {
     const fetchCars = async () => {
       try {
         const { data } = await api.get('/cars');
-        setCars(data);
+        if (Array.isArray(data)) {
+          setCars(data);
+        } else {
+          console.error("API returned non-array data:", data);
+          setCars([]);
+        }
         setLoading(false);
       } catch (error) {
         console.error("Error fetching cars:", error);

@@ -1,6 +1,15 @@
 import { Link } from "react-router-dom";
 
 const CarGrid = ({ products = [] }) => {
+  if (!Array.isArray(products)) {
+    console.error("CarGrid received non-array products:", products);
+    return (
+      <p className="text-white text-center col-span-full">
+        Error loading cars. Please try again later.
+      </p>
+    );
+  }
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
       {products.length > 0 ? (

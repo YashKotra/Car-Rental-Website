@@ -14,8 +14,14 @@ const Home = () => {
     const fetchCars = async () => {
       try {
         const { data } = await api.get("/cars");
-        // Show only first 8 cars or best sellers
-        setCars(data.slice(0, 8));
+        console.log("Fetched cars:", data); // Debug log
+        if (Array.isArray(data)) {
+          // Show only first 8 cars or best sellers
+          setCars(data.slice(0, 8));
+        } else {
+          console.error("API returned non-array data:", data);
+          setCars([]);
+        }
         setLoading(false);
       } catch (error) {
         console.error("Error fetching cars:", error);
@@ -29,7 +35,7 @@ const Home = () => {
   return (
     <div className="bg-black">
       <Hero />
-      
+
       <div className="container mx-auto px-4 py-12">
         <h2 className="text-3xl font-bold text-white text-center mb-8">
           Featured Cars

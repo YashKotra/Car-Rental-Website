@@ -1,9 +1,12 @@
 import axios from "axios";
 
+// Access environment variables
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
+console.log("API Base URL:", BASE_URL); // Debug log to check what URL is being used
+
 const api = axios.create({
-  baseURL: BASE_URL, // ✅ FIXED
+  baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },

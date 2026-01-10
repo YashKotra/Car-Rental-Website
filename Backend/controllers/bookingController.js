@@ -1,4 +1,4 @@
-const crypto = require("crypto");
+import crypto from "crypto";
 import Booking from "../models/Booking.js";
 import Car from "../models/Car.js";
 
@@ -9,15 +9,13 @@ const createBooking = async (req, res) => {
   const { carId, startDate, endDate, totalPrice, pickupLocation } = req.body;
 
   if (!carId || !startDate || !endDate) {
-    res.status(400).json({ message: "Please provide all required fields" });
-    return;
+    return res.status(400).json({ message: "Please provide all required fields" });
   }
 
   const car = await Car.findById(carId);
 
   if (!car) {
-    res.status(404).json({ message: "Car not found" });
-    return;
+    return res.status(404).json({ message: "Car not found" });
   }
 
   const booking = new Booking({
@@ -47,11 +45,11 @@ const getBookingById = async (req, res) => {
       .populate("user", "name email")
       .populate("car");
 
-    if (booking) {
-      res.json(booking);
-    } else {
-      res.status(404).json({ message: "Booking not found" });
+    if (!booking) {
+      return res.status(404).json({ message: "Booking not found" });
     }
+
+    res.json(booking);
   } catch (error) {
     res.status(500).json({ message: "Server Error" });
   }
@@ -62,14 +60,10 @@ const getBookingById = async (req, res) => {
 // @access  Private
 const getMyBookings = async (req, res) => {
   try {
-    if (!req.user) {
-      return res.status(401).json({ message: "User not authenticated" });
-    }
     const bookings = await Booking.find({ user: req.user._id }).populate("car");
     res.json(bookings);
   } catch (error) {
-    console.error("Error in getMyBookings:", error);
-    res.status(500).json({ message: "Server Error", error: error.message });
+    res.status(500).json({ message: "Server Error" });
   }
 };
 
@@ -81,6 +75,7 @@ const getBookings = async (req, res) => {
     const bookings = await Booking.find({})
       .populate("user", "id name")
       .populate("car");
+
     res.json(bookings);
   } catch (error) {
     res.status(500).json({ message: "Server Error" });
@@ -92,15 +87,17 @@ const getBookings = async (req, res) => {
 // @access  Private/Admin
 const updateBookingStatus = async (req, res) => {
   const { status } = req.body;
+
   try {
     const booking = await Booking.findById(req.params.id);
-    if (booking) {
-      booking.status = status;
-      const updatedBooking = await booking.save();
-      res.json(updatedBooking);
-    } else {
-      res.status(404).json({ message: "Booking not found" });
+
+    if (!booking) {
+      return res.status(404).json({ message: "Booking not found" });
     }
+
+    booking.status = status;
+    const updatedBooking = await booking.save();
+    res.json(updatedBooking);
   } catch (error) {
     res.status(500).json({ message: "Server Error" });
   }

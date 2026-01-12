@@ -4,7 +4,7 @@ const cars = [
     make: "Tesla",
     model: "Model 3",
     year: 2023,
-    pricePerDay: 120,
+    pricePerDay: 15000,
     imageUrl:
       "https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -24,7 +24,7 @@ const cars = [
     make: "Tesla",
     model: "Model S",
     year: 2024,
-    pricePerDay: 180,
+    pricePerDay: 20000,
     imageUrl:
       "https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -46,7 +46,7 @@ const cars = [
     make: "Ford",
     model: "Mustang GT",
     year: 2022,
-    pricePerDay: 150,
+    pricePerDay: 18000,
     imageUrl:
       "https://images.unsplash.com/photo-1547744152-14d985cb937f?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3Dhttps://images.unsplash.com/photo-1547744152-14d985cb937f?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     available: true,
@@ -66,7 +66,7 @@ const cars = [
     make: "Ford",
     model: "Mustang Shelby",
     year: 2023,
-    pricePerDay: 200,
+    pricePerDay: 25000,
     imageUrl:
       "https://images.unsplash.com/photo-1654012261389-8065f6412ac7?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Camaro image but looks sporty
     available: true,
@@ -88,7 +88,7 @@ const cars = [
     make: "Toyota",
     model: "RAV4 Hybrid",
     year: 2023,
-    pricePerDay: 85,
+    pricePerDay: 8000,
     imageUrl:
       "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -108,7 +108,7 @@ const cars = [
     make: "Toyota",
     model: "Highlander",
     year: 2024,
-    pricePerDay: 110,
+    pricePerDay: 10000,
     imageUrl:
       "https://images.unsplash.com/photo-1716068072348-64c2b7181161?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Generic SUV
     available: true,
@@ -130,7 +130,7 @@ const cars = [
     make: "BMW",
     model: "M4 Competition",
     year: 2023,
-    pricePerDay: 220,
+    pricePerDay: 25000,
     imageUrl:
       "https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -150,7 +150,7 @@ const cars = [
     make: "BMW",
     model: "3 Series",
     year: 2022,
-    pricePerDay: 130,
+    pricePerDay: 15000,
     imageUrl:
       "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -172,7 +172,7 @@ const cars = [
     make: "Audi",
     model: "Q7",
     year: 2024,
-    pricePerDay: 180,
+    pricePerDay: 20000,
     imageUrl:
       "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -192,7 +192,7 @@ const cars = [
     make: "Audi",
     model: "RS e-tron GT",
     year: 2023,
-    pricePerDay: 300,
+    pricePerDay: 35000,
     imageUrl:
       "https://images.unsplash.com/photo-1655126275641-21e114342284?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     available: true,
@@ -214,7 +214,7 @@ const cars = [
     make: "Mercedes-Benz",
     model: "C-Class",
     year: 2023,
-    pricePerDay: 140,
+    pricePerDay: 16000,
     imageUrl:
       "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -234,7 +234,7 @@ const cars = [
     make: "Mercedes-Benz",
     model: "G-Wagon",
     year: 2022,
-    pricePerDay: 400,
+    pricePerDay: 50000,
     imageUrl:
       "https://images.unsplash.com/photo-1520031441872-265e4ff70366?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -256,7 +256,7 @@ const cars = [
     make: "Porsche",
     model: "911 Carrera",
     year: 2023,
-    pricePerDay: 350,
+    pricePerDay: 40000,
     imageUrl:
       "https://images.unsplash.com/photo-1564694457220-0efef1a70d6d?q=80&w=930&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     available: true,
@@ -276,7 +276,7 @@ const cars = [
     make: "Porsche",
     model: "Cayenne",
     year: 2022,
-    pricePerDay: 200,
+    pricePerDay: 25000,
     imageUrl:
       "https://images.unsplash.com/photo-1678809156093-e4905d2cb2f2?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -298,7 +298,7 @@ const cars = [
     make: "Jeep",
     model: "Wrangler Rubicon",
     year: 2022,
-    pricePerDay: 130,
+    pricePerDay: 12000,
     imageUrl:
       "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -320,7 +320,7 @@ const cars = [
     make: "Honda",
     model: "Civic Type R",
     year: 2023,
-    pricePerDay: 100,
+    pricePerDay: 12000,
     imageUrl:
       "https://images.unsplash.com/photo-1606152421811-4819991b15f3?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -340,7 +340,7 @@ const cars = [
     make: "Honda",
     model: "CR-V",
     year: 2023,
-    pricePerDay: 90,
+    pricePerDay: 8000,
     imageUrl:
       "https://images.unsplash.com/photo-1568844293986-8d0400bd4745?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -362,7 +362,7 @@ const cars = [
     make: "Chevrolet",
     model: "Camaro SS",
     year: 2022,
-    pricePerDay: 140,
+    pricePerDay: 16000,
     imageUrl:
       "https://images.unsplash.com/photo-1552519507-da8b12273528?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -382,7 +382,7 @@ const cars = [
     make: "Chevrolet",
     model: "Tahoe",
     year: 2023,
-    pricePerDay: 160,
+    pricePerDay: 18000,
     imageUrl:
       "https://images.unsplash.com/photo-1533558701576-23c65e0272fb?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -404,7 +404,7 @@ const cars = [
     make: "Land Rover",
     model: "Range Rover Sport",
     year: 2023,
-    pricePerDay: 250,
+    pricePerDay: 30000,
     imageUrl:
       "https://images.unsplash.com/photo-1606618773696-1d2848a647b9?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -424,7 +424,7 @@ const cars = [
     make: "Land Rover",
     model: "Defender",
     year: 2024,
-    pricePerDay: 220,
+    pricePerDay: 28000,
     imageUrl:
       "https://images.unsplash.com/photo-1619717196020-00803513b63c?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -446,7 +446,7 @@ const cars = [
     make: "Lamborghini",
     model: "Huracan",
     year: 2023,
-    pricePerDay: 800,
+    pricePerDay: 75000,
     imageUrl:
       "https://images.unsplash.com/photo-1544614471-322693043442?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -466,7 +466,7 @@ const cars = [
     make: "Lamborghini",
     model: "Urus",
     year: 2023,
-    pricePerDay: 700,
+    pricePerDay: 65000,
     imageUrl:
       "https://images.unsplash.com/photo-1621505324540-9b25143a7590?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -488,7 +488,7 @@ const cars = [
     make: "Ferrari",
     model: "488 Spider",
     year: 2022,
-    pricePerDay: 900,
+    pricePerDay: 85000,
     imageUrl:
       "https://images.unsplash.com/photo-1592198084033-aade902d1aae?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -510,7 +510,7 @@ const cars = [
     make: "Hyundai",
     model: "Tucson",
     year: 2023,
-    pricePerDay: 80,
+    pricePerDay: 6000,
     imageUrl:
       "https://images.unsplash.com/photo-1619682817404-5758a74132e1?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -530,7 +530,7 @@ const cars = [
     make: "Hyundai",
     model: "Ioniq 5",
     year: 2024,
-    pricePerDay: 110,
+    pricePerDay: 10000,
     imageUrl:
       "https://images.unsplash.com/photo-1655208537618-2c26f6b539c3?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -552,7 +552,7 @@ const cars = [
     make: "Kia",
     model: "Sportage",
     year: 2023,
-    pricePerDay: 85,
+    pricePerDay: 7000,
     imageUrl:
       "https://images.unsplash.com/photo-1609521263047-f8f205293f24?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -574,7 +574,7 @@ const cars = [
     make: "Volkswagen",
     model: "Golf GTI",
     year: 2022,
-    pricePerDay: 95,
+    pricePerDay: 9000,
     imageUrl:
       "https://images.unsplash.com/photo-1541348263637-ba01a0d27c6d?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -594,7 +594,7 @@ const cars = [
     make: "Volkswagen",
     model: "Tiguan",
     year: 2023,
-    pricePerDay: 105,
+    pricePerDay: 10000,
     imageUrl:
       "https://images.unsplash.com/photo-1606222996452-97b77202157a?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -616,7 +616,7 @@ const cars = [
     make: "Nissan",
     model: "GT-R Nismo",
     year: 2023,
-    pricePerDay: 400,
+    pricePerDay: 45000,
     imageUrl:
       "https://images.unsplash.com/photo-1600712242615-d21213695cae?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -638,7 +638,7 @@ const cars = [
     make: "Rolls-Royce",
     model: "Phantom",
     year: 2023,
-    pricePerDay: 1500,
+    pricePerDay: 100000,
     imageUrl:
       "https://images.unsplash.com/photo-1631295868223-63265b40d9e4?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -660,7 +660,7 @@ const cars = [
     make: "Bentley",
     model: "Continental GT",
     year: 2023,
-    pricePerDay: 800,
+    pricePerDay: 90000,
     imageUrl:
       "https://images.unsplash.com/photo-1616422285623-13ff0162193c?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -682,7 +682,7 @@ const cars = [
     make: "Lexus",
     model: "RX 350",
     year: 2023,
-    pricePerDay: 120,
+    pricePerDay: 14000,
     imageUrl:
       "https://images.unsplash.com/photo-1611016832262-e64627d2c385?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -702,7 +702,7 @@ const cars = [
     make: "Lexus",
     model: "LC 500",
     year: 2023,
-    pricePerDay: 300,
+    pricePerDay: 35000,
     imageUrl:
       "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=800&q=80", // Generic Lexus/Sports
     available: true,
@@ -724,7 +724,7 @@ const cars = [
     make: "Volvo",
     model: "XC90",
     year: 2023,
-    pricePerDay: 130,
+    pricePerDay: 15000,
     imageUrl:
       "https://images.unsplash.com/photo-1617430588147-7975d045c364?auto=format&fit=crop&w=800&q=80", // Generic Volvo
     available: true,
@@ -746,7 +746,7 @@ const cars = [
     make: "Mazda",
     model: "CX-5",
     year: 2023,
-    pricePerDay: 80,
+    pricePerDay: 7000,
     imageUrl:
       "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -766,7 +766,7 @@ const cars = [
     make: "Mazda",
     model: "MX-5 Miata",
     year: 2022,
-    pricePerDay: 90,
+    pricePerDay: 10000,
     imageUrl:
       "https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=800&q=80", // Sports car generic
     available: true,
@@ -788,7 +788,7 @@ const cars = [
     make: "Subaru",
     model: "Outback",
     year: 2023,
-    pricePerDay: 85,
+    pricePerDay: 8000,
     imageUrl:
       "https://images.unsplash.com/photo-1629897282305-671c828d3a82?auto=format&fit=crop&w=800&q=80", // Generic Subaru
     available: true,
@@ -810,7 +810,7 @@ const cars = [
     make: "McLaren",
     model: "720S",
     year: 2023,
-    pricePerDay: 950,
+    pricePerDay: 90000,
     imageUrl:
       "https://images.unsplash.com/photo-1621135802920-133df287f89c?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -832,7 +832,7 @@ const cars = [
     make: "Aston Martin",
     model: "DB11",
     year: 2022,
-    pricePerDay: 850,
+    pricePerDay: 80000,
     imageUrl:
       "https://images.unsplash.com/photo-1605515298946-d062f2e9da53?auto=format&fit=crop&w=800&q=80",
     available: true,
@@ -854,7 +854,7 @@ const cars = [
     make: "Tesla",
     model: "Model Y",
     year: 2023,
-    pricePerDay: 130,
+    pricePerDay: 16000,
     imageUrl:
       "https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=800&q=80", // Model 3 img reuse
     available: true,
@@ -874,7 +874,7 @@ const cars = [
     make: "BMW",
     model: "X5",
     year: 2023,
-    pricePerDay: 160,
+    pricePerDay: 18000,
     imageUrl:
       "https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=800&q=80", // M4 img reuse (needs specific X5 but using placeholder)
     available: true,
@@ -894,7 +894,7 @@ const cars = [
     make: "Audi",
     model: "A6",
     year: 2022,
-    pricePerDay: 120,
+    pricePerDay: 14000,
     imageUrl:
       "https://images.unsplash.com/photo-1603584173870-7b299f58938d?auto=format&fit=crop&w=800&q=80", // e-tron img reuse
     available: true,
@@ -914,7 +914,7 @@ const cars = [
     make: "Mercedes-Benz",
     model: "E-Class",
     year: 2023,
-    pricePerDay: 150,
+    pricePerDay: 17000,
     imageUrl:
       "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80", // C-Class img reuse
     available: true,
@@ -934,7 +934,7 @@ const cars = [
     make: "Ford",
     model: "Bronco",
     year: 2023,
-    pricePerDay: 140,
+    pricePerDay: 16000,
     imageUrl:
       "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80", // Wrangler img reuse (similar style)
     available: true,
@@ -954,7 +954,7 @@ const cars = [
     make: "Toyota",
     model: "Camry",
     year: 2023,
-    pricePerDay: 70,
+    pricePerDay: 5000,
     imageUrl:
       "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?auto=format&fit=crop&w=800&q=80", // RAV4 img reuse (needs specific)
     available: true,
@@ -974,7 +974,7 @@ const cars = [
     make: "Nissan",
     model: "Altima",
     year: 2022,
-    pricePerDay: 65,
+    pricePerDay: 5000,
     imageUrl:
       "https://images.unsplash.com/photo-1606152421811-4819991b15f3?auto=format&fit=crop&w=800&q=80", // Civic img reuse
     available: true,
@@ -994,7 +994,7 @@ const cars = [
     make: "Hyundai",
     model: "Elantra",
     year: 2023,
-    pricePerDay: 60,
+    pricePerDay: 4000,
     imageUrl:
       "https://images.unsplash.com/photo-1606152421811-4819991b15f3?auto=format&fit=crop&w=800&q=80", // Civic img reuse
     available: true,
@@ -1014,7 +1014,7 @@ const cars = [
     make: "Chevrolet",
     model: "Corvette C8",
     year: 2023,
-    pricePerDay: 400,
+    pricePerDay: 45000,
     imageUrl:
       "https://images.unsplash.com/photo-1552519507-da8b12273528?auto=format&fit=crop&w=800&q=80", // Camaro img reuse
     available: true,
@@ -1034,7 +1034,7 @@ const cars = [
     make: "Jeep",
     model: "Grand Cherokee",
     year: 2023,
-    pricePerDay: 110,
+    pricePerDay: 12000,
     imageUrl:
       "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80", // Wrangler img reuse
     available: true,
@@ -1054,7 +1054,7 @@ const cars = [
     make: "Dodge",
     model: "Challenger Hellcat",
     year: 2022,
-    pricePerDay: 250,
+    pricePerDay: 28000,
     imageUrl:
       "https://images.unsplash.com/photo-1584345604480-83d6fa8f33e7?auto=format&fit=crop&w=800&q=80", // Mustang img reuse
     available: true,
@@ -1074,7 +1074,7 @@ const cars = [
     make: "Dodge",
     model: "Charger",
     year: 2023,
-    pricePerDay: 180,
+    pricePerDay: 20000,
     imageUrl:
       "https://images.unsplash.com/photo-1584345604480-83d6fa8f33e7?auto=format&fit=crop&w=800&q=80", // Mustang img reuse
     available: true,
@@ -1094,7 +1094,7 @@ const cars = [
     make: "Cadillac",
     model: "Escalade",
     year: 2023,
-    pricePerDay: 300,
+    pricePerDay: 35000,
     imageUrl:
       "https://images.unsplash.com/photo-1533558701576-23c65e0272fb?auto=format&fit=crop&w=800&q=80", // Tahoe img reuse
     available: true,
@@ -1114,7 +1114,7 @@ const cars = [
     make: "GMC",
     model: "Yukon Denali",
     year: 2023,
-    pricePerDay: 250,
+    pricePerDay: 28000,
     imageUrl:
       "https://images.unsplash.com/photo-1533558701576-23c65e0272fb?auto=format&fit=crop&w=800&q=80", // Tahoe img reuse
     available: true,
@@ -1134,7 +1134,7 @@ const cars = [
     make: "Jaguar",
     model: "F-Type",
     year: 2023,
-    pricePerDay: 220,
+    pricePerDay: 25000,
     imageUrl:
       "https://images.unsplash.com/photo-1605515298946-d062f2e9da53?auto=format&fit=crop&w=800&q=80", // Aston img reuse
     available: true,
@@ -1154,7 +1154,7 @@ const cars = [
     make: "Jaguar",
     model: "F-Pace",
     year: 2023,
-    pricePerDay: 130,
+    pricePerDay: 15000,
     imageUrl:
       "https://images.unsplash.com/photo-1606618773696-1d2848a647b9?auto=format&fit=crop&w=800&q=80", // Range Rover img reuse
     available: true,
@@ -1174,7 +1174,7 @@ const cars = [
     make: "Maserati",
     model: "Ghibli",
     year: 2022,
-    pricePerDay: 180,
+    pricePerDay: 20000,
     imageUrl:
       "https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=800&q=80", // BMW M4 img reuse (generic sport sedan)
     available: true,
@@ -1194,7 +1194,7 @@ const cars = [
     make: "Maserati",
     model: "Levante",
     year: 2023,
-    pricePerDay: 200,
+    pricePerDay: 22000,
     imageUrl:
       "https://images.unsplash.com/photo-1621505324540-9b25143a7590?auto=format&fit=crop&w=800&q=80", // Urus img reuse
     available: true,
@@ -1214,7 +1214,7 @@ const cars = [
     make: "Alfa Romeo",
     model: "Giulia Quadrifoglio",
     year: 2023,
-    pricePerDay: 210,
+    pricePerDay: 23000,
     imageUrl:
       "https://images.unsplash.com/photo-1544614471-322693043442?auto=format&fit=crop&w=800&q=80", // Huracan img reuse (red sports car)
     available: true,
@@ -1234,7 +1234,7 @@ const cars = [
     make: "Alfa Romeo",
     model: "Stelvio",
     year: 2023,
-    pricePerDay: 140,
+    pricePerDay: 16000,
     imageUrl:
       "https://images.unsplash.com/photo-1609521263047-f8f205293f24?auto=format&fit=crop&w=800&q=80", // Sportage img reuse (generic red SUV)
     available: true,
@@ -1254,7 +1254,7 @@ const cars = [
     make: "Mini",
     model: "Cooper S",
     year: 2023,
-    pricePerDay: 80,
+    pricePerDay: 8000,
     imageUrl:
       "https://images.unsplash.com/photo-1541348263637-ba01a0d27c6d?auto=format&fit=crop&w=800&q=80", // Golf img reuse (hatchback)
     available: true,
@@ -1274,7 +1274,7 @@ const cars = [
     make: "Fiat",
     model: "500 Abarth",
     year: 2022,
-    pricePerDay: 70,
+    pricePerDay: 7000,
     imageUrl:
       "https://images.unsplash.com/photo-1541348263637-ba01a0d27c6d?auto=format&fit=crop&w=800&q=80", // Golf img reuse
     available: true,
@@ -1294,7 +1294,7 @@ const cars = [
     make: "Renault",
     model: "Megane RS",
     year: 2023,
-    pricePerDay: 90,
+    pricePerDay: 9000,
     imageUrl:
       "https://images.unsplash.com/photo-1541348263637-ba01a0d27c6d?auto=format&fit=crop&w=800&q=80", // Golf img reuse
     available: true,
@@ -1314,7 +1314,7 @@ const cars = [
     make: "Peugeot",
     model: "3008",
     year: 2023,
-    pricePerDay: 85,
+    pricePerDay: 8000,
     imageUrl:
       "https://images.unsplash.com/photo-1606222996452-97b77202157a?auto=format&fit=crop&w=800&q=80", // Tiguan img reuse
     available: true,

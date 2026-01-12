@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
+import SignupImg from "../../src/assets/HeroImg.jpg";
 import { login } from "../redux/authSlice";
 
 const Login = () => {
@@ -32,16 +32,12 @@ const Login = () => {
           </h1>
 
           {error && (
-            <p className="mb-4 text-red-400 text-sm text-center">
-              {error}
-            </p>
+            <p className="mb-4 text-red-400 text-sm text-center">{error}</p>
           )}
 
           <form className="space-y-5" onSubmit={handleSubmit}>
             <div>
-              <label className="block mb-2 text-sm text-gray-400">
-                Email
-              </label>
+              <label className="block mb-2 text-sm text-gray-400">Email</label>
               <input
                 type="email"
                 required
@@ -78,10 +74,7 @@ const Login = () => {
           {/* Register */}
           <div className="mt-6 text-center text-sm text-gray-400">
             Don&apos;t have an account?{" "}
-            <Link
-              to="/signup"
-              className="text-white hover:underline"
-            >
+            <Link to="/signup" className="text-white hover:underline">
               Register
             </Link>
           </div>
@@ -105,12 +98,8 @@ const Login = () => {
           {/* Terms */}
           <p className="mt-6 text-xs text-gray-500 text-center leading-relaxed">
             By signing in, you agree to our{" "}
-            <span className="underline cursor-pointer">Terms</span>{" "}
-            and{" "}
-            <span className="underline cursor-pointer">
-              Privacy Policy
-            </span>
-            .
+            <span className="underline cursor-pointer">Terms</span> and{" "}
+            <span className="underline cursor-pointer">Privacy Policy</span>.
           </p>
         </div>
       </div>
@@ -118,7 +107,7 @@ const Login = () => {
       {/* Right: Image Section (smaller & elegant) */}
       <div className="hidden lg:flex w-1/2 items-center justify-center">
         <img
-          src="\src\assets\HeroImg.jpg"
+          src={SignupImg}
           alt="Login Visual"
           className="h-3/4 object-cover rounded-3xl opacity-90 shadow-2xl"
         />

@@ -33,7 +33,7 @@ const carSchema = mongoose.Schema(
     },
     description: { type: String },
     features: [String],
-    type: { type: String, required: true }, // SUV, Sedan, etc.
+    type: { type: String, required: true },
     averageRating: { type: Number, default: 0 },
     numReviews: { type: Number, default: 0 },
     isBestSeller: { type: Boolean, default: false },

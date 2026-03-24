@@ -16,9 +16,11 @@ const bookingSchema = mongoose.Schema({
   totalPrice: { type: Number, required: true },
   status: {
     type: String,
-    enum: ['pending', 'confirmed', 'cancelled', 'completed'],
+    enum: ['pending', 'confirmed', 'cancelled', 'completed', 'reserved', 'queued', 'expired'],
     default: 'pending',
   },
+  expiresAt: { type: Date },
+  queuePosition: { type: Number },
   pickupLocation: {
     type: {
       type: String,

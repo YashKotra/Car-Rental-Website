@@ -29,6 +29,10 @@ const CarDetail = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [pickupLocation, setPickupLocation] = useState("Sector 17, Chandigarh");
   const [isBooking, setIsBooking] = useState(false);
+  const [bookedDates, setBookedDates] = useState([]);
+  const [dateError, setDateError] = useState("");
+  const [hasOverlap, setHasOverlap] = useState(false);
+  const [queueInfo, setQueueInfo] = useState(null);
 
   // Get coordinates for current selection
   const coords =
@@ -39,6 +43,8 @@ const CarDetail = () => {
       try {
         const { data } = await api.get(`/cars/${id}`);
         setCar(data);
+        const { data: datesData } = await api.get(`/bookings/car/${id}/dates`);
+        setBookedDates(datesData);
       } catch (err) {
         setError("Failed to fetch car details");
         console.error(err);
@@ -50,21 +56,116 @@ const CarDetail = () => {
   }, [id]);
 
   useEffect(() => {
+    setDateError("");
     if (startDate && endDate && car) {
       const start = new Date(startDate);
       const end = new Date(endDate);
       const diffTime = end - start;
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
+      if (start > end) {
+        setDateError("Start date cannot be after end date.");
+        setTotalPrice(0);
+        return;
+      }
+
+      const isOverlap = bookedDates.some((booking) => {
+        const bStart = new Date(booking.startDate);
+        const bEnd = new Date(booking.endDate);
+        return start < bEnd && end > bStart;
+      });
+
+      setHasOverlap(isOverlap);
+
       if (diffDays > 0) {
         setTotalPrice(diffDays * car.pricePerDay);
       } else {
+        setDateError("Minimum booking duration is 1 day.");
         setTotalPrice(0);
       }
     } else {
+      setHasOverlap(false);
       setTotalPrice(0);
     }
-  }, [startDate, endDate, car]);
+  }, [startDate, endDate, car, bookedDates]);
+
+  // Handle Queue Polling
+  useEffect(() => {
+    let interval;
+    if (queueInfo) {
+      interval = setInterval(async () => {
+        try {
+          const { data } = await api.get(`/bookings/${queueInfo.bookingId}/queue-status`);
+          if (data.status === "reserved") {
+            setQueueInfo(null);
+            alert("It's your turn! Please complete the payment. You have 5 minutes.");
+            initiatePayment(queueInfo.bookingId, totalPrice);
+          } else if (data.status === "queued") {
+            setQueueInfo({
+              bookingId: queueInfo.bookingId,
+              sequenceNumber: data.queuePosition,
+              estimatedWait: data.queuePosition * 5,
+            });
+          }
+        } catch (err) {
+          console.error("Queue poll error", err);
+        }
+      }, 5000);
+    }
+    return () => clearInterval(interval);
+  }, [queueInfo, totalPrice, car]);
+
+  const initiatePayment = async (bookingId, amount) => {
+    try {
+      const {
+        data: { key },
+      } = await api.get("/payment/key");
+      const { data: order } = await api.post("/payment/create-order", {
+        amount,
+        bookingId,
+      });
+
+      const options = {
+        key: key,
+        amount: order.amount,
+        currency: order.currency,
+        name: "Car Rental",
+        description: `Booking for ${car.make} ${car.model}`,
+        image: car.imageUrl,
+        order_id: order.id,
+        handler: async function (response) {
+          try {
+            await api.post("/payment/verify", {
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+              bookingId,
+            });
+            alert("Booking confirmed successfully!");
+            navigate("/my-bookings");
+          } catch (err) {
+            console.error(err);
+            alert("Payment verification failed");
+          }
+        },
+        prefill: {
+          name: userInfo.name,
+          email: userInfo.email,
+        },
+        theme: {
+          color: "#000000",
+        },
+      };
+
+      const rzp1 = new window.Razorpay(options);
+      rzp1.open();
+    } catch (err) {
+      console.error(err);
+      alert("Payment initialization failed");
+    } finally {
+      setIsBooking(false);
+    }
+  };
 
   const handleBookNow = async () => {
     if (!userInfo) {
@@ -98,54 +199,20 @@ const CarDetail = () => {
 
       const { data: booking } = await api.post("/bookings", bookingData);
 
-      // 2. Create Razorpay Order
-      const {
-        data: { key },
-      } = await api.get("/payment/key");
-      const { data: order } = await api.post("/payment/create-order", {
-        amount: totalPrice,
-        bookingId: booking._id,
-      });
+      if (booking.status === "queued") {
+        setQueueInfo({
+          bookingId: booking._id,
+          sequenceNumber: booking.queuePosition,
+          estimatedWait: booking.queuePosition * 5,
+        });
+        setIsBooking(false);
+        return;
+      }
 
-      // 3. Open Razorpay
-      const options = {
-        key: key,
-        amount: order.amount,
-        currency: order.currency,
-        name: "Car Rental",
-        description: `Booking for ${car.make} ${car.model}`,
-        image: car.imageUrl,
-        order_id: order.id,
-        handler: async function (response) {
-          try {
-            await api.post("/payment/verify", {
-              razorpay_order_id: response.razorpay_order_id,
-              razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_signature: response.razorpay_signature,
-              bookingId: booking._id,
-            });
-            alert("Booking confirmed successfully!");
-            navigate("/my-bookings"); // Redirect to My Bookings
-          } catch (err) {
-            console.error(err);
-            alert("Payment verification failed");
-          }
-        },
-        prefill: {
-          name: userInfo.name,
-          email: userInfo.email,
-        },
-        theme: {
-          color: "#000000",
-        },
-      };
-
-      const rzp1 = new window.Razorpay(options);
-      rzp1.open();
+      await initiatePayment(booking._id, totalPrice);
     } catch (err) {
       console.error(err);
       alert("Booking failed: " + (err.response?.data?.message || err.message));
-    } finally {
       setIsBooking(false);
     }
   };
@@ -277,6 +344,42 @@ const CarDetail = () => {
               </div>
             )}
 
+            {dateError && (
+              <div className="mb-6 p-4 bg-red-900 bg-opacity-50 rounded border border-red-700">
+                <p className="text-red-400 font-semibold">{dateError}</p>
+              </div>
+            )}
+
+            {hasOverlap && !queueInfo && (
+              <div className="mb-6 p-4 bg-yellow-900 bg-opacity-50 rounded border border-yellow-700">
+                <p className="text-yellow-400 font-semibold mb-2">
+                  ⚠️ Someone else currently holds a reservation for these dates.
+                </p>
+                <p className="text-yellow-300 text-sm">
+                  If you click Book Now, you will be placed in a queue. You will get the car if they fail to complete their payment within 5 minutes.
+                </p>
+              </div>
+            )}
+
+            {queueInfo && (
+              <div className="mb-6 p-5 bg-blue-900 bg-opacity-50 rounded border border-blue-700 text-center shadow-lg transform transition-all shadow-blue-500/50">
+                <h3 className="text-2xl font-bold text-white mb-2">You are in the Queue!</h3>
+                <div className="flex justify-center gap-6 mt-4">
+                  <div className="bg-black bg-opacity-40 p-3 rounded">
+                    <p className="text-blue-300 text-xs uppercase tracking-wider mb-1">Sequence No.</p>
+                    <p className="text-3xl font-bold text-white">{queueInfo.sequenceNumber}</p>
+                  </div>
+                  <div className="bg-black bg-opacity-40 p-3 rounded">
+                    <p className="text-blue-300 text-xs uppercase tracking-wider mb-1">Wait Time</p>
+                    <p className="text-3xl font-bold text-white">~{queueInfo.estimatedWait}m</p>
+                  </div>
+                </div>
+                <p className="text-blue-200 mt-4 text-sm">
+                  Please do not close this window. We are checking the queue automatically...
+                </p>
+              </div>
+            )}
+
             <div className="mb-6">
               <p className="text-white mb-2">Select Pick up location</p>
               <select
@@ -293,21 +396,23 @@ const CarDetail = () => {
             </div>
 
             {/* Book Now Button */}
-            <button
-              onClick={handleBookNow}
-              disabled={isBooking}
-              className={`bg-white text-black py-3 px-6 rounded w-full mb-4 font-semibold text-lg transition ${
-                isBooking
-                  ? "cursor-not-allowed opacity-50"
-                  : "hover:bg-gray-300"
-              }`}
-            >
-              {isBooking
-                ? "Processing..."
-                : `BOOK NOW ${
-                    totalPrice > 0 ? `(₹${totalPrice.toLocaleString()})` : ""
-                  }`}
-            </button>
+            {!queueInfo && (
+              <button
+                onClick={handleBookNow}
+                disabled={isBooking || !!dateError || totalPrice <= 0}
+                className={`bg-white text-black py-3 px-6 rounded w-full mb-4 font-semibold text-lg transition ${
+                  isBooking || !!dateError || totalPrice <= 0
+                    ? "cursor-not-allowed opacity-50"
+                    : "hover:bg-gray-300"
+                }`}
+              >
+                {isBooking
+                  ? "Processing..."
+                  : `BOOK NOW ${
+                      totalPrice > 0 ? `(₹${totalPrice.toLocaleString()})` : ""
+                    }`}
+              </button>
+            )}
 
             {/* Specifications */}
             <div className="mt-10 text-white">

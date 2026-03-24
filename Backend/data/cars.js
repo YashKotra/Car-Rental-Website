@@ -48,7 +48,7 @@ const cars = [
     year: 2022,
     pricePerDay: 18000,
     imageUrl:
-      "https://images.unsplash.com/photo-1547744152-14d985cb937f?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3Dhttps://images.unsplash.com/photo-1547744152-14d985cb937f?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1547744152-14d985cb937f?w=800&q=80",
     available: true,
     transmission: "Automatic",
     fuelType: "Petrol",
@@ -68,7 +68,7 @@ const cars = [
     year: 2023,
     pricePerDay: 25000,
     imageUrl:
-      "https://images.unsplash.com/photo-1654012261389-8065f6412ac7?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Camaro image but looks sporty
+      "https://images.unsplash.com/photo-1547744152-14d985cb937f?w=800&q=80",
     available: true,
     transmission: "Manual",
     fuelType: "Petrol",
@@ -278,7 +278,7 @@ const cars = [
     year: 2022,
     pricePerDay: 25000,
     imageUrl:
-      "https://images.unsplash.com/photo-1678809156093-e4905d2cb2f2?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1699325982456-7d76db545a35?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     available: true,
     transmission: "Automatic",
     fuelType: "Hybrid",
@@ -322,7 +322,7 @@ const cars = [
     year: 2023,
     pricePerDay: 12000,
     imageUrl:
-      "https://images.unsplash.com/photo-1606152421811-4819991b15f3?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1642912832910-7d403ce697e1?q=80&w=2077&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     available: true,
     transmission: "Manual",
     fuelType: "Petrol",
@@ -406,7 +406,7 @@ const cars = [
     year: 2023,
     pricePerDay: 30000,
     imageUrl:
-      "https://images.unsplash.com/photo-1606618773696-1d2848a647b9?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1606618773696-1d2848a647b9?w=800&q=80",
     available: true,
     transmission: "Automatic",
     fuelType: "Diesel",
@@ -426,7 +426,7 @@ const cars = [
     year: 2024,
     pricePerDay: 28000,
     imageUrl:
-      "https://images.unsplash.com/photo-1619717196020-00803513b63c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1619717196020-00803513b63c?w=800&q=80",
     available: true,
     transmission: "Automatic",
     fuelType: "Diesel",
@@ -448,7 +448,7 @@ const cars = [
     year: 2023,
     pricePerDay: 75000,
     imageUrl:
-      "https://images.unsplash.com/photo-1544614471-322693043442?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1544614471-322693043442?w=800&q=80",
     available: true,
     transmission: "Automatic",
     fuelType: "Petrol",
@@ -468,7 +468,7 @@ const cars = [
     year: 2023,
     pricePerDay: 65000,
     imageUrl:
-      "https://images.unsplash.com/photo-1621505324540-9b25143a7590?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1621505324540-9b25143a7590?w=800&q=80",
     available: true,
     transmission: "Automatic",
     fuelType: "Petrol",
@@ -512,7 +512,7 @@ const cars = [
     year: 2023,
     pricePerDay: 6000,
     imageUrl:
-      "https://images.unsplash.com/photo-1619682817404-5758a74132e1?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=800&q=80",
     available: true,
     transmission: "Automatic",
     fuelType: "Petrol",
@@ -532,7 +532,7 @@ const cars = [
     year: 2024,
     pricePerDay: 10000,
     imageUrl:
-      "https://images.unsplash.com/photo-1655208537618-2c26f6b539c3?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1617430588147-7975d045c364?w=800&q=80",
     available: true,
     transmission: "Automatic",
     fuelType: "Electric",
@@ -576,7 +576,7 @@ const cars = [
     year: 2022,
     pricePerDay: 9000,
     imageUrl:
-      "https://images.unsplash.com/photo-1541348263637-ba01a0d27c6d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1541348263637-ba01a0d27c6d?w=800&q=80",
     available: true,
     transmission: "Automatic",
     fuelType: "Petrol",
@@ -596,7 +596,7 @@ const cars = [
     year: 2023,
     pricePerDay: 10000,
     imageUrl:
-      "https://images.unsplash.com/photo-1606222996452-97b77202157a?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1599838923541-e8caa1f93c92?w=800&q=80",
     available: true,
     transmission: "Automatic",
     fuelType: "Diesel",
@@ -618,7 +618,7 @@ const cars = [
     year: 2023,
     pricePerDay: 45000,
     imageUrl:
-      "https://images.unsplash.com/photo-1600712242615-d21213695cae?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600712242615-d21213695cae?w=800&q=80",
     available: true,
     transmission: "Automatic",
     fuelType: "Petrol",
@@ -684,7 +684,7 @@ const cars = [
     year: 2023,
     pricePerDay: 14000,
     imageUrl:
-      "https://images.unsplash.com/photo-1611016832262-e64627d2c385?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1599838923541-e8caa1f93c92?w=800&q=80",
     available: true,
     transmission: "Automatic",
     fuelType: "Hybrid",
@@ -726,7 +726,7 @@ const cars = [
     year: 2023,
     pricePerDay: 15000,
     imageUrl:
-      "https://images.unsplash.com/photo-1617430588147-7975d045c364?auto=format&fit=crop&w=800&q=80", // Generic Volvo
+      "https://images.unsplash.com/photo-1617430588147-7975d045c364?w=800&q=80",
     available: true,
     transmission: "Automatic",
     fuelType: "Hybrid",
@@ -790,7 +790,7 @@ const cars = [
     year: 2023,
     pricePerDay: 8000,
     imageUrl:
-      "https://images.unsplash.com/photo-1629897282305-671c828d3a82?auto=format&fit=crop&w=800&q=80", // Generic Subaru
+      "https://images.unsplash.com/photo-1629897282305-671c828d3a82?w=800&q=80",
     available: true,
     transmission: "Automatic",
     fuelType: "Petrol",
@@ -896,7 +896,7 @@ const cars = [
     year: 2022,
     pricePerDay: 14000,
     imageUrl:
-      "https://images.unsplash.com/photo-1603584173870-7b299f58938d?auto=format&fit=crop&w=800&q=80", // e-tron img reuse
+      "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=800&q=80",
     available: true,
     transmission: "Automatic",
     fuelType: "Petrol",
@@ -976,7 +976,7 @@ const cars = [
     year: 2022,
     pricePerDay: 5000,
     imageUrl:
-      "https://images.unsplash.com/photo-1606152421811-4819991b15f3?auto=format&fit=crop&w=800&q=80", // Civic img reuse
+      "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=800&q=80",
     available: true,
     transmission: "Automatic",
     fuelType: "Petrol",
@@ -996,7 +996,7 @@ const cars = [
     year: 2023,
     pricePerDay: 4000,
     imageUrl:
-      "https://images.unsplash.com/photo-1606152421811-4819991b15f3?auto=format&fit=crop&w=800&q=80", // Civic img reuse
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
     available: true,
     transmission: "Automatic",
     fuelType: "Petrol",
@@ -1016,7 +1016,7 @@ const cars = [
     year: 2023,
     pricePerDay: 45000,
     imageUrl:
-      "https://images.unsplash.com/photo-1552519507-da8b12273528?auto=format&fit=crop&w=800&q=80", // Camaro img reuse
+      "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=800&q=80",
     available: true,
     transmission: "Automatic",
     fuelType: "Petrol",
@@ -1056,7 +1056,7 @@ const cars = [
     year: 2022,
     pricePerDay: 28000,
     imageUrl:
-      "https://images.unsplash.com/photo-1584345604480-83d6fa8f33e7?auto=format&fit=crop&w=800&q=80", // Mustang img reuse
+      "https://images.unsplash.com/photo-1545389336-cf3ee69ef557?w=800&q=80",
     available: true,
     transmission: "Automatic",
     fuelType: "Petrol",
@@ -1076,7 +1076,7 @@ const cars = [
     year: 2023,
     pricePerDay: 20000,
     imageUrl:
-      "https://images.unsplash.com/photo-1584345604480-83d6fa8f33e7?auto=format&fit=crop&w=800&q=80", // Mustang img reuse
+      "https://images.unsplash.com/photo-1606611013016-969c19f27081?w=800&q=80",
     available: true,
     transmission: "Automatic",
     fuelType: "Petrol",
@@ -1256,7 +1256,7 @@ const cars = [
     year: 2023,
     pricePerDay: 8000,
     imageUrl:
-      "https://images.unsplash.com/photo-1541348263637-ba01a0d27c6d?auto=format&fit=crop&w=800&q=80", // Golf img reuse (hatchback)
+      "https://images.unsplash.com/photo-1552519507-da8b12273528?w=800&q=80",
     available: true,
     transmission: "Automatic",
     fuelType: "Petrol",
@@ -1276,7 +1276,7 @@ const cars = [
     year: 2022,
     pricePerDay: 7000,
     imageUrl:
-      "https://images.unsplash.com/photo-1541348263637-ba01a0d27c6d?auto=format&fit=crop&w=800&q=80", // Golf img reuse
+      "https://images.unsplash.com/photo-1552519507-da8b12273528?w=800&q=80",
     available: true,
     transmission: "Manual",
     fuelType: "Petrol",
@@ -1296,7 +1296,7 @@ const cars = [
     year: 2023,
     pricePerDay: 9000,
     imageUrl:
-      "https://images.unsplash.com/photo-1541348263637-ba01a0d27c6d?auto=format&fit=crop&w=800&q=80", // Golf img reuse
+      "https://images.unsplash.com/photo-1606611013016-969c19f27081?w=800&q=80",
     available: true,
     transmission: "Manual",
     fuelType: "Petrol",
@@ -1316,7 +1316,7 @@ const cars = [
     year: 2023,
     pricePerDay: 8000,
     imageUrl:
-      "https://images.unsplash.com/photo-1606222996452-97b77202157a?auto=format&fit=crop&w=800&q=80", // Tiguan img reuse
+      "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800&q=80",
     available: true,
     transmission: "Automatic",
     fuelType: "Diesel",

@@ -1,20 +1,12 @@
 import React from "react";
-import {
-  FaInstagram,
-  FaXTwitter,
-  FaLinkedin,
-  FaGithub,
-  FaFileAlt,
-} from "react-icons/fa";
+import { FaInstagram, FaLinkedin, FaGithub, FaFileAlt } from "react-icons/fa";
 
 const TopBar = () => {
   return (
     <div className="bg-black text-white border-b-2 border-white">
       <div className="container mx-auto flex justify-between items-center py-3 px-4 text-sm">
-        
         {/* Left: Social Icons */}
         <div className="hidden md:flex items-center space-x-4">
-          
           <a
             href="https://www.linkedin.com/in/yash-kotra"
             target="_blank"
@@ -50,10 +42,6 @@ const TopBar = () => {
           >
             <FaInstagram className="h-5 w-5" />
           </a>
-
-          <a href="#" className="hover:text-gray-300">
-            <FaXTwitter className="h-5 w-5" />
-          </a>
         </div>
 
         {/* Center: Tagline */}
@@ -67,7 +55,6 @@ const TopBar = () => {
             +91 7056008838
           </a>
         </div>
-
       </div>
     </div>
   );

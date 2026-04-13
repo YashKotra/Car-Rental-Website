@@ -72,7 +72,10 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a href="/rentals/electric" className="hover:text-white transition">
+              <a
+                href="/rentals/electric"
+                className="hover:text-white transition"
+              >
                 Electric Vehicles
               </a>
             </li>
@@ -115,18 +118,39 @@ export default function Footer() {
         <div>
           <h3 className="text-xl font-semibold text-white mb-4">Follow Us</h3>
           <div className="flex space-x-4">
-            {[FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn].map(
-              (Icon, idx) => (
-                <a
-                  key={idx}
-                  href="#"
-                  className="p-2 bg-gray-800 hover:bg-blue-600 rounded-full transition"
-                  aria-label="Social icon"
-                >
-                  <Icon size={18} className="text-white" />
-                </a>
-              )
-            )}
+            {[
+              {
+                Icon: FaFacebookF,
+                href: "https://www.facebook.com/",
+                label: "Facebook",
+              },
+              {
+                Icon: FaTwitter,
+                href: "https://twitter.com/",
+                label: "Twitter",
+              },
+              {
+                Icon: FaInstagram,
+                href: "https://www.instagram.com/_iam.yash17__/",
+                label: "Instagram",
+              },
+              {
+                Icon: FaLinkedinIn,
+                href: "https://www.linkedin.com/in/yash-kotra",
+                label: "LinkedIn",
+              },
+            ].map(({ Icon, href, label }, idx) => (
+              <a
+                key={idx}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 bg-gray-800 hover:bg-blue-600 rounded-full transition"
+                aria-label={label}
+              >
+                <Icon size={18} className="text-white" />
+              </a>
+            ))}
           </div>
         </div>
       </div>
@@ -134,8 +158,8 @@ export default function Footer() {
       {/* Copyright */}
       <div className="mt-10 border-t border-gray-700 pt-6 text-center text-sm text-gray-500">
         &copy; {new Date().getFullYear()} Made and Designed by{" "}
-        <span className="text-white font-medium">Yash Kotra</span>. All
-        rights reserved.
+        <span className="text-white font-medium">Yash Kotra</span>. All rights
+        reserved.
       </div>
     </footer>
   );
